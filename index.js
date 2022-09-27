@@ -116,17 +116,23 @@ async function deleteAccount(num) {
    await page.waitForTimeout(500)
    await page.click('.btn.btn-primary.btn-lg')
 
-   await page.waitForTimeout(5000)
-
-   const code = await checkCode()
-
    await page.waitForTimeout(500)
 
-   var subStr = code.match(":<br>(.*)<br><br>Do");
-   await page.type('input[placeholder="Confirmation code"]', subStr[1], { delay: 100 });
-   await page.waitForTimeout(500)
-   await page.click('.btn.btn-primary.btn-lg')
+   await browser.close()
+   // const code = await checkCode()
 
+   // await page.waitForTimeout(500)
+
+   // var subStr = code.match(":<br>(.*)<br><br>Do");
+   // await page.type('input[placeholder="Confirmation code"]', subStr[1], { delay: 100 });
+   // await page.waitForTimeout(500)
+   // await page.click('.btn.btn-primary.btn-lg')
+   // await page.waitForTimeout(500)
+   // await page.click('a[href="/delete"]')
+   // await page.waitForTimeout(500)
+   // await page.click('.btn.btn-primary.btn-lg')
+   // await page.waitForTimeout(500)
+   // await page.click('#deactivate_submit_btn')
 }
 
 
@@ -138,13 +144,10 @@ async function createFolder() {
    
 
    // {headless:false}
-  const browser = await puppeteer.launch();
-  const page = await browser.newPage({
-   headless: true,
-			args: [
-				'--no-sandbox'
-			]
-  });
+  const browser = await puppeteer.launch({
+      // headless: false,
+   });
+  const page = await browser.newPage();
   await page.setViewport({
    width: 1920,
    height: 600
@@ -196,6 +199,7 @@ document.location.reload(true);
    const channelArray = await page.$$('#LeftColumn-main > div.Transition.zoom-fade > div > div > div.Transition.slide-optimized > div.Transition__slide--active > div > div > div.ListItem.Chat.chat-item-clickable.group.no-selection.has-ripple')
    
    let firstChannel = true;
+   let firstOwner = true;
    for (let channel of channelArray){
       
       await page.waitForTimeout(1000)
@@ -211,8 +215,16 @@ document.location.reload(true);
       if (await page.$('#RightColumn > div.RightHeader > div > div > section > button') !== null) {
 
          await page.waitForTimeout(1000)
-         await page.waitForSelector('.multiline-item .title')
-         const link = await page.evaluate(() => document.querySelector('.multiline-item .title').textContent)
+
+         
+         // await page.waitForSelector('.multiline-item .title')
+         const link = await page.evaluate(() => {
+           if (document.querySelector('.multiline-item .title')) {
+               return document.querySelector('.multiline-item .title').textContent
+           } else {
+               return document.querySelector('#RightColumn > div.Transition.zoom-fade > div > div > div.profile-info > div.ProfileInfo > div.info > div > div').textContent
+           }
+         })
          
          
          await page.click('#RightColumn > div.RightHeader > div > div > section > button')
@@ -236,7 +248,7 @@ document.location.reload(true);
                // await page.waitForTimeout(10000)
                if (await page.$('.Management .ListItem.chat-item-clickable:nth-child(3)') !== null) {
                   await admin.click()
-                  await page.waitForTimeout(1000)
+                  await page.waitForTimeout(1500)
                   // await page.waitForSelector('.icon-delete')
                   await page.click('.icon-delete')
                   await page.waitForTimeout(1000)
@@ -250,9 +262,13 @@ document.location.reload(true);
             // await page.waitForSelector('.icon-add-user-filled')
             await page.click('.icon-add-user-filled')
 
-            await page.waitForTimeout(1000)
-            // await page.waitForSelector('.Management__filter input[placeholder="Search"]')
-            await page.type('.Management__filter input[placeholder="Search"]', "@JuicerWeb", { delay: 100 });
+            if (firstOwner) {
+               await page.waitForTimeout(1000)
+               // await page.waitForSelector('.Management__filter input[placeholder="Search"]')
+               await page.type('.Management__filter input[placeholder="Search"]', "@JuicerWeb", { delay: 100 });
+               firstOwner = false
+            }
+            
 
             await page.waitForTimeout(1000)
             await page.click('.ListItem.chat-item-clickable.scroll-item.no-selection')
@@ -275,8 +291,8 @@ document.location.reload(true);
    res.send(log);
    await browser.close();
    // console.log(log)
-   // let number = await getNumber()
-   // await deleteAccount(number)
+   let number = await getNumber()
+   await deleteAccount(number)
 
 }
 
