@@ -145,7 +145,7 @@ async function createFolder() {
 
    // {headless:false}
   const browser = await puppeteer.launch({
-      // headless: false,
+      args: ['--no-sandbox']
    });
   const page = await browser.newPage();
   await page.setViewport({
