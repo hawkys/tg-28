@@ -26,8 +26,11 @@ const puppeteer = require('puppeteer');
 
 
 async function getNumber() {
-   const browser = await puppeteer.launch({executablePath: '/usr/bin/chromium-browser',
-   args: ['--no-sandbox']});
+   const browser = await puppeteer.launch({
+      executablePath: '/usr/bin/chromium-browser',
+      args: ['--no-sandbox'],
+      // headless: false,
+});
    const page = await browser.newPage();
   await page.setViewport({
    width: 1920,
@@ -43,13 +46,13 @@ document.location.reload(true);
   }, session);
   await page.waitForSelector('.ListItem-button')
    await page.click('.DropdownMenu')
-   await page.waitForTimeout(1000)
+   await page.waitForTimeout(500)
    await page.click('.icon-saved-messages')
-   await page.waitForTimeout(1000)
+   await page.waitForTimeout(500)
    await page.click('.DropdownMenu')
-   await page.waitForTimeout(1000)
+   await page.waitForTimeout(500)
    await page.click('.icon-settings')
-   await page.waitForTimeout(1000)
+   await page.waitForTimeout(500)
    const phoneElement = await page.waitForSelector('.ChatExtra .ListItem:first-child .multiline-item .title');
    let phoneUser = await phoneElement.evaluate(el => el.textContent);
    await browser.close()
@@ -146,35 +149,35 @@ async function createFolder() {
   await page.goto('https://web.telegram.org/z/');
   await page.evaluate((session) => {
    let data = JSON.parse(session)
-Object.keys(data).forEach(function (k) {
-    localStorage.setItem(k, data[k]);
-});
-document.location.reload(true);
+   Object.keys(data).forEach(function (k) {
+      localStorage.setItem(k, data[k]);
+   });
+   document.location.reload(true);
   }, session);
    await page.waitForSelector('.ListItem-button')
    await page.click('.DropdownMenu')
-   await page.waitForTimeout(1000)
+   await page.waitForTimeout(500)
    await page.click('.icon-settings')
 
-   await page.waitForTimeout(1000)
+   await page.waitForTimeout(500)
 
    const mynameElement = await page.waitForSelector('.fullName');
    myname = await mynameElement.evaluate(el => el.textContent);
    console.log(myname)
 
-   await page.waitForTimeout(1000)
+   await page.waitForTimeout(500)
    await page.click('.icon-folder')
-   await page.waitForTimeout(1000)
+   await page.waitForTimeout(500)
    await page.click('.icon-add')
    await page.waitForSelector('input[aria-label="Folder name"]')
    await page.type('input[aria-label="Folder name"]', "my-all-channel", { delay: 100 });
-   await page.waitForTimeout(1000)
+   await page.waitForTimeout(500)
    await page.click('.settings-item.no-border.pt-3 .icon-add')
-   await page.waitForTimeout(1000)
+   await page.waitForTimeout(500)
    await page.click('.ListItem-button > .icon-channel')
-   await page.waitForTimeout(1000)
+   await page.waitForTimeout(500)
    await page.click('button[title="Confirm"]')
-   await page.waitForTimeout(1000)
+   await page.waitForTimeout(500)
    await page.click('button[title="Create folder"]')
    await page.waitForTimeout(1000)
    await page.click('#Settings > div.Transition__slide--active > div.left-header > button')
@@ -185,7 +188,7 @@ document.location.reload(true);
    if (button) {
        await button.click();
    }
-   await page.waitForTimeout(1000)
+   await page.waitForTimeout(500)
 
    const channelArray = await page.$$('#LeftColumn-main > div.Transition.zoom-fade > div > div > div.Transition.slide-optimized > div.Transition__slide--active > div > div > div.ListItem.Chat.chat-item-clickable.group.no-selection.has-ripple')
    
@@ -193,19 +196,19 @@ document.location.reload(true);
    let firstOwner = true;
    for (let channel of channelArray){
       
-      await page.waitForTimeout(1000)
+      await page.waitForTimeout(300)
       await channel.click()
       if (firstChannel) {
-         await page.waitForTimeout(1000)
+         await page.waitForTimeout(500)
          await page.click('.MiddleHeader')
          firstChannel = false
       }
 
-      await page.waitForTimeout(1000)
+      await page.waitForTimeout(500)
 
       if (await page.$('#RightColumn > div.RightHeader > div > div > section > button') !== null) {
 
-         await page.waitForTimeout(1000)
+         await page.waitForTimeout(500)
 
          
          // await page.waitForSelector('.multiline-item .title')
@@ -219,9 +222,9 @@ document.location.reload(true);
          
          
          await page.click('#RightColumn > div.RightHeader > div > div > section > button')
-         await page.waitForTimeout(1000)
+         await page.waitForTimeout(500)
          await page.click('.icon-admin')
-         await page.waitForTimeout(200)
+         await page.waitForTimeout(1000)
 
 
          const ownerNickname = await page.evaluate(() => Array.from(document.querySelectorAll('span.status')).filter(item => item.textContent.includes('Owner'))[0].closest('.info').querySelector('h3').textContent)
@@ -233,7 +236,7 @@ document.location.reload(true);
             await deleteAdmin()
 
             async function deleteAdmin() {
-               await page.waitForTimeout(1000)
+               await page.waitForTimeout(500)
                const admin = await page.$('.Management .ListItem.chat-item-clickable:nth-child(3)')
                console.log(admin)
                // await page.waitForTimeout(10000)
@@ -242,14 +245,14 @@ document.location.reload(true);
                   await page.waitForTimeout(500)
                   // await page.waitForSelector('.icon-delete')
                   await page.click('.icon-delete')
-                  await page.waitForTimeout(1000)
+                  await page.waitForTimeout(500)
                   // await page.waitForSelector('.Button.confirm-dialog-button.default.danger.text')
                   page.click('.Button.confirm-dialog-button.default.danger.text')
                   await deleteAdmin()
                }
             }
 
-            await page.waitForTimeout(1000)
+            await page.waitForTimeout(500)
             // await page.waitForSelector('.icon-add-user-filled')
             await page.click('.icon-add-user-filled')
 
@@ -264,10 +267,10 @@ document.location.reload(true);
             await page.waitForTimeout(1000)
             await page.click('.ListItem.chat-item-clickable.scroll-item.no-selection')
 
-            await page.waitForTimeout(1000)
+            await page.waitForTimeout(500)
             await page.click('.Button[aria-label="Save"]')
 
-            await page.waitForTimeout(3000)
+            await page.waitForTimeout(500)
 
             log.push({link, role: 'owner'})
 
