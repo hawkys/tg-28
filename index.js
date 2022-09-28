@@ -18,6 +18,8 @@ app.get('/', (req, res) => {
 
 app.post("/uploadFile", (req, res) => {
    var session = req.body.session
+   
+   session = session.slice(1,-1)
 
    console.log(session)
 
