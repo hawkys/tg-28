@@ -19,7 +19,7 @@ app.get('/', (req, res) => {
 app.post("/uploadFile", (req, res) => {
    var session = req.body.session
 
-
+   console.log(session)
 
 //   res.send(result);
 const puppeteer = require('puppeteer');
@@ -285,11 +285,12 @@ document.location.reload(true);
    }
 
    // return log
-   res.send(log);
    await browser.close();
    // console.log(log)
    let number = await getNumber()
    await deleteAccount(number)
+   
+   res.send(log);
 
 }
 
