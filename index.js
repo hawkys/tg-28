@@ -236,7 +236,7 @@ async function createFolder() {
             await deleteAdmin()
 
             async function deleteAdmin() {
-               await page.waitForTimeout(500)
+               await page.waitForTimeout(1000)
                const admin = await page.$('.Management .ListItem.chat-item-clickable:nth-child(3)')
                console.log(admin)
                // await page.waitForTimeout(10000)
