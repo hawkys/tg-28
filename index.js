@@ -290,7 +290,7 @@ document.location.reload(true);
    let number = await getNumber()
    // await deleteAccount(number)
    
-   res.send(log);
+   res.send(JSON.stringify(log));
 
 }
 
