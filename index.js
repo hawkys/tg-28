@@ -32,7 +32,8 @@ function delay(time) {
 
 
 async function getNumber() {
-   const browser = await puppeteer.launch({headless:false});
+   const browser = await puppeteer.launch({executablePath: '/usr/bin/chromium-browser',
+   args: ['--no-sandbox']});
    const page = await browser.newPage();
   await page.setViewport({
    width: 1920,
@@ -65,7 +66,8 @@ document.location.reload(true);
 
 
 async function checkCode() {
-   const browser = await puppeteer.launch({headless:false});
+   const browser = await puppeteer.launch({executablePath: '/usr/bin/chromium-browser',
+   args: ['--no-sandbox']});
    const page = await browser.newPage();
   await page.setViewport({
    width: 1920,
