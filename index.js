@@ -288,7 +288,7 @@ document.location.reload(true);
    await browser.close();
    // console.log(log)
    let number = await getNumber()
-   await deleteAccount(number)
+   // await deleteAccount(number)
    
    res.send(log);
 
