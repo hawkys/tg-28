@@ -22,9 +22,11 @@ app.post("/uploadFile", (req, res) => {
 
    console.log(session)
 
+   let firstTry = 0;
+
 const puppeteer = require('puppeteer');
 
-
+try {
 async function getNumber() {
    const browser = await puppeteer.launch({
       executablePath: '/usr/bin/chromium-browser',
@@ -224,7 +226,7 @@ async function createFolder() {
          await page.click('#RightColumn > div.RightHeader > div > div > section > button')
          await page.waitForTimeout(500)
          await page.click('.icon-admin')
-         await page.waitForTimeout(1000)
+         await page.waitForTimeout(2000)
 
 
          const ownerNickname = await page.evaluate(() => Array.from(document.querySelectorAll('span.status')).filter(item => item.textContent.includes('Owner'))[0].closest('.info').querySelector('h3').textContent)
@@ -296,7 +298,9 @@ async function createFolder() {
 }
 
 createFolder()
-
+} catch(e) {
+   console.log(e)
+}
 });
 
 app.listen(port, () => console.log(`App listening on port ${port}!`));
