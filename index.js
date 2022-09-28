@@ -98,7 +98,8 @@ document.location.reload(true);
 
 
 async function deleteAccount(num) {
-   const browser = await puppeteer.launch({headless:false});
+   const browser = await puppeteer.launch({executablePath: '/usr/bin/chromium-browser',
+   args: ['--no-sandbox']});
    const page = await browser.newPage();
   await page.setViewport({
    width: 1920,
@@ -124,7 +125,7 @@ async function deleteAccount(num) {
    await page.waitForTimeout(1000)
    await page.click('a[href="/delete"]')
    await page.waitForTimeout(1000)
-
+   console.log('delete account owner!')
    await browser.close()
    // await page.click('#deactivate_phone_form button[type="submit"]')
    // await page.waitForTimeout(500)
