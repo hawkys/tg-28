@@ -140,7 +140,7 @@ async function createFolder() {
    // {headless:false}
   const browser = await puppeteer.launch({
       // headless:false,
-      executablePath: '/usr/bin/chromium-browser',
+      // executablePath: '/usr/bin/chromium-browser',
       args: ['--no-sandbox']
    });
   const page = await browser.newPage();
