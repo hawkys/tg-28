@@ -183,9 +183,9 @@ async function createFolder() {
    await page.click('button[title="Confirm"]')
    await page.waitForTimeout(500)
    await page.click('button[title="Create folder"]')
-   await page.waitForTimeout(1000)
+   await page.waitForTimeout(2000)
    await page.click('#Settings > div.Transition__slide--active > div.left-header > button')
-   await page.waitForTimeout(1000)
+   await page.waitForTimeout(2000)
    await page.click('#Settings > div.Transition__slide--active > div.left-header > button')
    await page.waitForTimeout(1000)
    const [button] = await page.$x("//span[contains(., 'my-all-channel')]");
