@@ -130,7 +130,7 @@ async function deleteAccount(num) {
    await browser.close()
    await page.click('#deactivate_phone_form button[type="submit"]')
    await page.waitForTimeout(1000)
-   await page.click('#deactivate_submit_btn')
+   // await page.click('#deactivate_submit_btn')
 }
 
 
