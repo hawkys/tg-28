@@ -246,10 +246,10 @@ async function createFolder() {
                // await page.waitForTimeout(10000)
                if (await page.$('.Management .ListItem.chat-item-clickable:nth-child(3)') !== null) {
                   await admin.click()
-                  await page.waitForTimeout(700)
+                  await page.waitForTimeout(1000)
                   // await page.waitForSelector('.icon-delete')
                   await page.click('.icon-delete')
-                  await page.waitForTimeout(700)
+                  await page.waitForTimeout(1000)
                   // await page.waitForSelector('.Button.confirm-dialog-button.default.danger.text')
                   page.click('.Button.confirm-dialog-button.default.danger.text')
                   await deleteAdmin()
