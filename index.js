@@ -117,6 +117,8 @@ async function deleteAccount(num) {
 
    const code = await checkCode()
 
+   console.log(code)
+
    await page.waitForTimeout(1000)
 
    var subStr = code.match(":<br>(.*)<br><br>Do");
