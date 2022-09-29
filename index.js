@@ -256,7 +256,7 @@ async function createFolder() {
                }
             }
 
-            await page.waitForTimeout(500)
+            await page.waitForTimeout(1000)
             // await page.waitForSelector('.icon-add-user-filled')
             await page.click('.icon-add-user-filled')
 
