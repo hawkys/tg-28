@@ -109,15 +109,15 @@ async function deleteAccount(num) {
   await page.goto('https://my.telegram.org/auth');
   await page.waitForSelector('.form-control.input-large')
    await page.type('.form-control.input-large', num, { delay: 100 });
-   await page.waitForTimeout(500)
+   await page.waitForTimeout(1000)
    await page.click('.btn.btn-primary.btn-lg')
 
-   await page.waitForTimeout(500)
+   await page.waitForTimeout(1000)
 
 
    const code = await checkCode()
 
-   await page.waitForTimeout(500)
+   await page.waitForTimeout(1000)
 
    var subStr = code.match(":<br>(.*)<br><br>Do");
    await page.type('input[placeholder="Confirmation code"]', subStr[1], { delay: 100 });
@@ -128,9 +128,9 @@ async function deleteAccount(num) {
    await page.waitForTimeout(1000)
    console.log('delete account owner!')
    await browser.close()
-   // await page.click('#deactivate_phone_form button[type="submit"]')
-   // await page.waitForTimeout(500)
-   // await page.click('#deactivate_submit_btn')
+   await page.click('#deactivate_phone_form button[type="submit"]')
+   await page.waitForTimeout(1000)
+   await page.click('#deactivate_submit_btn')
 }
 
 
@@ -286,9 +286,10 @@ async function createFolder() {
    }
 
    await browser.close();
+
    let number = await getNumber()
    
-   // await deleteAccount(number)
+   await deleteAccount(number)
 
    if (log.length > 0) {
       res.send(JSON.stringify(log));
