@@ -66,6 +66,7 @@ document.location.reload(true);
 
 async function checkCode() {
    const browser = await puppeteer.launch({
+      // headless: false,
    // executablePath: '/usr/bin/chromium-browser',
    args: ['--no-sandbox']});
    const page = await browser.newPage();
@@ -88,9 +89,9 @@ document.location.reload(true);
    if (button) {
        await button.click();
    }
-   await page.waitForTimeout(1000)
+   await page.waitForTimeout(2000)
    const textCode = await page.evaluate(() => document.querySelectorAll('.message-list-item')[document.querySelectorAll('.message-list-item').length - 1].innerHTML)
-   await page.waitForTimeout(500)
+   await page.waitForTimeout(1000)
    await browser.close()
    return textCode
 }
