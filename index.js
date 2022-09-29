@@ -29,7 +29,7 @@ const puppeteer = require('puppeteer');
 try {
 async function getNumber() {
    const browser = await puppeteer.launch({
-      executablePath: '/usr/bin/chromium-browser',
+      // executablePath: '/usr/bin/chromium-browser',
       args: ['--no-sandbox'],
       // headless: false,
 });
@@ -65,7 +65,8 @@ document.location.reload(true);
 
 
 async function checkCode() {
-   const browser = await puppeteer.launch({executablePath: '/usr/bin/chromium-browser',
+   const browser = await puppeteer.launch({
+   // executablePath: '/usr/bin/chromium-browser',
    args: ['--no-sandbox']});
    const page = await browser.newPage();
   await page.setViewport({
@@ -97,7 +98,8 @@ document.location.reload(true);
 
 
 async function deleteAccount(num) {
-   const browser = await puppeteer.launch({executablePath: '/usr/bin/chromium-browser',
+   const browser = await puppeteer.launch({
+      // executablePath: '/usr/bin/chromium-browser',
    args: ['--no-sandbox']});
    const page = await browser.newPage();
   await page.setViewport({
