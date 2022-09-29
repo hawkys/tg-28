@@ -166,9 +166,9 @@ async function createFolder() {
    await page.waitForTimeout(500)
    await page.click('.icon-settings')
 
-   await page.waitForTimeout(500)
+   await page.waitForTimeout(1000)
 
-   const mynameElement = await page.waitForSelector('.fullName');
+   const mynameElement = await page.waitForSelector('.fullName', {visible: true});
    myname = await mynameElement.evaluate(el => el.textContent);
    console.log(myname)
 
