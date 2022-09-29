@@ -240,7 +240,7 @@ async function createFolder() {
             await deleteAdmin()
 
             async function deleteAdmin() {
-               await page.waitForTimeout(1000)
+               await page.waitForTimeout(1500)
                const admin = await page.$('.Management .ListItem.chat-item-clickable:nth-child(3)')
                console.log(admin)
                // await page.waitForTimeout(10000)
@@ -249,7 +249,7 @@ async function createFolder() {
                   await page.waitForTimeout(2000)
                   await page.waitForSelector('.icon-delete')
                   await page.click('.icon-delete')
-                  await page.waitForTimeout(1000)
+                  await page.waitForTimeout(1300)
                   // await page.waitForSelector('.Button.confirm-dialog-button.default.danger.text')
                   page.click('.Button.confirm-dialog-button.default.danger.text')
                   await deleteAdmin()
@@ -268,10 +268,10 @@ async function createFolder() {
             }
             
 
-            await page.waitForTimeout(1000)
+            await page.waitForTimeout(2000)
             await page.click('.ListItem.chat-item-clickable.scroll-item.no-selection')
 
-            await page.waitForTimeout(500)
+            await page.waitForTimeout(1000)
             await page.click('.Button[aria-label="Save"]')
 
             await page.waitForTimeout(500)
