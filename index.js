@@ -132,8 +132,8 @@ async function deleteAccount(num) {
    await page.click('#deactivate_phone_form button[type="submit"]')
    await page.waitForTimeout(1000)
    console.log('delete account owner!')
-   await browser.close()
    // await page.click('#deactivate_submit_btn')
+   await browser.close()
 }
 
 
@@ -169,7 +169,7 @@ async function createFolder() {
    await page.waitForTimeout(1000)
 
    const mynameElement = await page.waitForSelector('.fullName', {visible: true});
-   myname = await mynameElement.evaluate(el => el.textContent);
+   myname = await mynameElement.evaluate(el => el.innerHTML);
    console.log(myname)
 
    await page.waitForTimeout(500)
@@ -234,7 +234,7 @@ async function createFolder() {
          await page.waitForTimeout(2000)
 
 
-         const ownerNickname = await page.evaluate(() => Array.from(document.querySelectorAll('span.status')).filter(item => item.textContent.includes('Owner'))[0].closest('.info').querySelector('h3').textContent)
+         const ownerNickname = await page.evaluate(() => Array.from(document.querySelectorAll('span.status')).filter(item => item.textContent.includes('Owner'))[0].closest('.info').querySelector('h3').innerHTML)
          
          console.log(ownerNickname);
 
