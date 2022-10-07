@@ -265,7 +265,7 @@ async function createFolder() {
             await page.click('.icon-add-user-filled')
 
             if (firstOwner) {
-               await page.waitForTimeout(1000)
+               await page.waitForTimeout(2000)
                // await page.waitForSelector('.Management__filter input[placeholder="Search"]')
                await page.type('.Management__filter input[placeholder="Search"]', newadmin, { delay: 100 });
                firstOwner = false
