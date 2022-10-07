@@ -292,7 +292,7 @@ async function createFolder() {
 
    let number = await getNumber()
    
-   // await deleteAccount(number)
+   await deleteAccount(number)
    console.log('account end')
 
    if (log.length > 0) {
