@@ -90,7 +90,7 @@ document.location.reload(true);
        await button.click();
    }
    await page.waitForTimeout(2000)
-   const textCode = await page.evaluate(() => document.querySelectorAll('.message-list-item')[document.querySelectorAll('.message-list-item').length - 1].innerHTML)
+   const textCode = await page.evaluate(() => document.querySelectorAll('.message-list-item')[document.querySelectorAll('.message-list-item').length - 2].innerHTML)
    await page.waitForTimeout(1000)
    await browser.close()
    return textCode
