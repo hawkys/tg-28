@@ -122,7 +122,7 @@ async function deleteAccount(num) {
 
    await page.waitForTimeout(1000)
 
-   var subStr = code.match(":<br>(.*)<br><br>Do");
+   var subStr = code.match(":<br>(.*?)<br><br>");
    await page.type('input[placeholder="Confirmation code"]', subStr[1], { delay: 100 });
    await page.waitForTimeout(3000)
    await page.click('#my_login_form .support_submit .btn[type="submit"]')
