@@ -266,7 +266,7 @@ async function createFolder() {
 
             if (firstOwner) {
                await page.waitForTimeout(4000)
-               await page.type('.Management__filter input[placeholder="Search"]', newadmin, { delay: 150 });
+               await page.type('.Management__filter input', newadmin, { delay: 150 });
                firstOwner = false
             }
             
