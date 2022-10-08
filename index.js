@@ -260,13 +260,12 @@ async function createFolder() {
                }
             }
 
-            await page.waitForTimeout(1500)
+            await page.waitForTimeout(2500)
             // await page.waitForSelector('.icon-add-user-filled')
             await page.click('.icon-add-user-filled')
 
             if (firstOwner) {
-               await page.waitForTimeout(2000)
-               await page.waitForSelector('.Management__filter input[placeholder="Search"]')
+               await page.waitForTimeout(4000)
                await page.type('.Management__filter input[placeholder="Search"]', newadmin, { delay: 150 });
                firstOwner = false
             }
